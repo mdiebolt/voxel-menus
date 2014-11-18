@@ -23,7 +23,7 @@ Main
     bartender = null
     roboSheriff = null
     roboSheriff2 = null
-    
+
     characters = []
 
     addCharacters = (scene) ->
@@ -44,7 +44,7 @@ Main
           z: 20
 
       characters.push roboSheriff2
-      scene.add roboSheriff2.I.obj3D      
+      scene.add roboSheriff2.I.obj3D
 
     $.when(Loader.finished(), TacticsCore.Loader.get())
     .then (modelData, spreadsheetData) ->
@@ -65,7 +65,7 @@ Main
           # adding to the scene each frame resets the model position
           unless addedToScene
             addCharacters scene
-  
+
             addedToScene = true
 
           characters.invoke "update", t, dt
