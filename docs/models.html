@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>README</title>
+  <title>models</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="http://strd6.github.io/cdn/parallel/docco.css" />
@@ -18,10 +18,53 @@
               <div class="pilwrap">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              
+              <h1 id="models">Models</h1>
+
             </div>
-            <div class="content"><pre><code>
+            <div class="content"><pre><code class="lang-coffeescript">
 </code></pre>
+</div>
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              <div class="pilwrap">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Model data for each character, item, and terrain
+and their actions (animation states).</p>
+
+            </div>
+            <div class="content"><pre><code class="lang-coffeescript">module.exports =
+  characters:
+    bartender:
+      idle: [<span class="string">"bartender"</span>]
+      wink: [<span class="string">"bartender_wink_0"</span>]
+    robo_sheriff:
+      idle: [<span class="string">"robo_sheriff"</span>, <span class="string">"robo_sheriff_idle_1"</span>]
+    bandit:
+      idle: [<span class="string">"jetpack_bandit"</span>]
+  terrain:
+    cactus:
+      idle: [<span class="string">"cactus"</span>]
+  items:
+    arrow:
+      idle: [<span class="string">"arrow"</span>]
+    beam_sword:
+      idle: [<span class="string">"beam_sword_idle_0"</span>]
+      grow: [
+        <span class="string">"beam_sword_grow_0"</span>
+        <span class="string">"beam_sword_grow_1"</span>
+        <span class="string">"beam_sword_grow_2"</span>
+        <span class="string">"beam_sword_grow_3"</span>
+      ]
+    branding_iron:
+      idle: [<span class="string">"branding_iron"</span>]
+    gun:
+      idle: [<span class="string">"gun"</span>]
+    hoverboard:
+      idle: [<span class="string">"hoverboard"</span>]</code></pre>
 </div>
         </li>
         

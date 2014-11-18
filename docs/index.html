@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>README</title>
+  <title>index</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="http://strd6.github.io/cdn/parallel/docco.css" />
@@ -18,10 +18,109 @@
               <div class="pilwrap">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
+              <h1 id="main">Main</h1>
+
+            </div>
+            <div class="content"><pre><code class="lang-coffeescript">
+</code></pre>
+</div>
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              <div class="pilwrap">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
               
             </div>
-            <div class="content"><pre><code>
-</code></pre>
+            <div class="content"><pre><code class="lang-coffeescript">TacticsCore = require <span class="string">"tactics-core"</span>
+
+Loader = require <span class="string">"./loader"</span>
+modelData = require <span class="string">"./models"</span>
+
+GameObject = require <span class="string">"./game_object"</span>
+
+t = <span class="number">0</span>
+cachedModels = {}
+spreadsheetAttributes = {}
+
+addedToScene = <span class="literal">false</span>
+
+Loader.fromObj <span class="string">"items"</span>, modelData.items
+Loader.fromObj <span class="string">"terrain"</span>, modelData.terrain
+Loader.fromObj <span class="string">"characters"</span>, modelData.characters
+
+TacticsCore.Loader.get()
+
+bartender = <span class="literal">null</span>
+roboSheriff = <span class="literal">null</span>
+roboSheriff2 = <span class="literal">null</span>
+
+characters = []
+
+<span class="function"><span class="title">addCharacters</span></span> = (scene) -&gt;
+  roboSheriff = GameObject
+    name: <span class="string">"Robo Sheriff"</span>
+    cachedModels: cachedModels
+
+  characters.push roboSheriff
+  scene.add roboSheriff.I.obj3D
+
+  roboSheriff2 = GameObject
+    name: <span class="string">"Robo Sheriff"</span>
+    cachedModels: cachedModels
+    tOffset: <span class="number">0.125</span>
+    position:
+      x: <span class="number">20</span>
+      y: <span class="number">0</span>
+      z: <span class="number">20</span>
+
+  characters.push roboSheriff2
+  scene.add roboSheriff2.I.obj3D      
+
+$.<span class="keyword">when</span>(Loader.finished(), TacticsCore.Loader.get())
+.<span class="keyword">then</span> (modelData, spreadsheetData) -&gt;
+  console.log modelData
+  console.log spreadsheetData
+
+  extend cachedModels, modelData
+  extend spreadsheetAttributes, spreadsheetData
+
+  activeCharacter = <span class="literal">null</span>
+  theScene = <span class="literal">null</span>
+
+  TacticsCore.init
+    data: {}
+    update: (scene, t, dt) -&gt;
+      theScene = scene
+      <span class="comment"># Need this hack to prevent adding stuff to the scene each frame</span>
+      <span class="comment"># adding to the scene each frame resets the model position</span>
+      <span class="keyword">unless</span> addedToScene
+        addCharacters scene
+
+        addedToScene = <span class="literal">true</span>
+
+      characters.invoke <span class="string">"update"</span>, t, dt
+
+    clickObjectsFn: -&gt;
+      <span class="keyword">if</span> activeCharacter
+        theScene.children
+      <span class="keyword">else</span>
+        characters.map (character) -&gt; character.I.obj3D
+    click: (results) -&gt;
+      <span class="keyword">if</span> results[<span class="number">0</span>]
+        console.log results[<span class="number">0</span>]
+
+        {object} = results[<span class="number">0</span>]
+
+        console.log object
+
+        <span class="keyword">if</span> character = object.userData.character
+          activeCharacter = character
+        <span class="keyword">else</span>
+          <span class="comment"># Move to location</span>
+          activeCharacter?.I.position.copy(object.position).setY(<span class="number">0</span>)</code></pre>
 </div>
         </li>
         
