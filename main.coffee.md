@@ -8,7 +8,7 @@ Main
 
     GameObject = require "./game_object"
     
-    {closeMenu, createMenu, openMenu} = require "./menu"
+    {closeMenu, createMenu, openMenu, updateMenu} = require "./menu"
     
     t = 0
     cachedModels = {}
@@ -53,6 +53,7 @@ Main
 
             addedToScene = true
 
+          updateMenu()
           characters.invoke "update", t, dt
 
         clickObjectsFn: ->

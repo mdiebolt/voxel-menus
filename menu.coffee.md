@@ -1,7 +1,7 @@
 Menu
 ====
 
-    require "./lib/tween"
+    TWEEN = require "./lib/tween"
   
     OFFSETS = [
       { x: -15, y: 20, z: 0 }
@@ -19,6 +19,7 @@ Menu
     #   map: THREE.ImageUtils.loadTexture "https://s3.amazonaws.com/distri-tactics/crate.jpg"
     
     menuCubes = []
+    tweens = []
 
     module.exports = 
       createMenu: (scene) ->
@@ -32,10 +33,49 @@ Menu
       openMenu: (position) ->       
         {x, y, z} = position
 
+        tweens.length = 0
+
         menuCubes.forEach (cube, i) ->
-          cube.visible = true
-          cube.position.set x + OFFSETS[i].x, y + OFFSETS[i].y, z + OFFSETS[i].z
+          start = 
+            x: x + OFFSETS[i].x
+            y: 500
+            z: z + OFFSETS[i].z
+            
+          end = 
+            x: start.x 
+            y: y + OFFSETS[i].y
+            z: start.z
+            
+          tween = new TWEEN.Tween(start).to(end, 1000)
+          tweens.push
+            tween: tween
+            cube: cube
+          tween.start()
       
       closeMenu: ->
-        menuCubes.forEach (cube) ->
-          cube.position.setY 500
+        tweens.length = 0
+
+        menuCubes.forEach (cube, i) ->
+          {x, y, z} = cube.position
+          
+          start = 
+            x: x
+            y: y
+            z: z
+            
+          end = 
+            x: x
+            y: 500
+            z: z
+            
+          tween = new TWEEN.Tween(start).to(end, 1000)
+          tweens.push
+            tween: tween
+            cube: cube
+          tween.start()
+          
+      updateMenu: ->
+        TWEEN.update()
+        tweens.forEach (obj) ->
+          obj.tween.onUpdate ->
+            obj.cube.position.set @x, @y, @z
