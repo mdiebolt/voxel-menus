@@ -3,6 +3,8 @@ Menu
 
     TWEEN = require "./lib/tween"
   
+    OFF_CAMERA_HEIGHT = 100
+  
     OFFSETS = [
       { x: -15, y: 20, z: 0 }
       { x: 15, y: 20, z: 0 }
@@ -25,7 +27,7 @@ Menu
       createMenu: (scene) ->
         OFFSETS.forEach (offset) ->
           cube = new THREE.Mesh geometry, material
-          cube.position.set offset.x, offset.y + 500, offset.z
+          cube.position.set offset.x, offset.y + OFF_CAMERA_HEIGHT, offset.z
           
           menuCubes.push cube
           scene.add cube        
@@ -38,7 +40,7 @@ Menu
         menuCubes.forEach (cube, i) ->
           start = 
             x: x + OFFSETS[i].x
-            y: 500
+            y: OFF_CAMERA_HEIGHT
             z: z + OFFSETS[i].z
             
           end = 
@@ -47,6 +49,7 @@ Menu
             z: start.z
             
           tween = new TWEEN.Tween(start).to(end, 1000)
+          tween.easing(TWEEN.Easing.Back.InOut)
           tweens.push
             tween: tween
             cube: cube
@@ -65,10 +68,11 @@ Menu
             
           end = 
             x: x
-            y: 500
+            y: OFF_CAMERA_HEIGHT
             z: z
             
           tween = new TWEEN.Tween(start).to(end, 1000)
+          tween.easing(TWEEN.Easing.Back.InOut)
           tweens.push
             tween: tween
             cube: cube
