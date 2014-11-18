@@ -57,8 +57,8 @@ characters = []
 
 <span class="function"><span class="title">openMenu</span></span> = (position, scene) -&gt;
   geometry = <span class="keyword">new</span> THREE.BoxGeometry(<span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>)
-  material = <span class="keyword">new</span> THREE.MeshBasicMaterial
-    color: <span class="number">0xfffff</span>
+  material = <span class="keyword">new</span> THREE.MeshLambertMaterial
+    map: THREE.ImageUtils.loadTexture <span class="string">"https://s3.amazonaws.com/distri-tactics/crate.jpg?blah=twadsfas"</span>
 
   {x, y, z} = position
 
