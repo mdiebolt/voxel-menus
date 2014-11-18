@@ -18,9 +18,7 @@ Main
 
     TacticsCore.Loader.get()
 
-    bartender = null
     roboSheriff = null
-    roboSheriff2 = null
 
     characters = []
 
@@ -32,23 +30,8 @@ Main
       characters.push roboSheriff
       scene.add roboSheriff.I.obj3D
 
-      roboSheriff2 = GameObject
-        name: "Robo Sheriff"
-        cachedModels: cachedModels
-        tOffset: 0.125
-        position:
-          x: 20
-          y: 0
-          z: 20
-
-      characters.push roboSheriff2
-      scene.add roboSheriff2.I.obj3D
-
     $.when(Loader.finished(), TacticsCore.Loader.get())
     .then (modelData, spreadsheetData) ->
-      console.log modelData
-      console.log spreadsheetData
-
       extend cachedModels, modelData
       extend spreadsheetAttributes, spreadsheetData
 
