@@ -55,27 +55,6 @@ roboSheriff = <span class="literal">null</span>
 
 characters = []
 
-<span class="function"><span class="title">openMenu</span></span> = (position, scene) -&gt;
-  geometry = <span class="keyword">new</span> THREE.BoxGeometry(<span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>)
-  material = <span class="keyword">new</span> THREE.MeshBasicMaterial
-    color: <span class="number">0xfffff</span>
-
-  <span class="comment"># TODO: fix s3 cross domain nonsense</span>
-  <span class="comment"># material = new THREE.MeshLambertMaterial</span>
-  <span class="comment">#   map: THREE.ImageUtils.loadTexture "https://s3.amazonaws.com/distri-tactics/crate.jpg"</span>
-
-  {x, y, z} = position
-
-  [
-    { x: -<span class="number">15</span>, y: <span class="number">20</span>, z: <span class="number">0</span> }
-    { x: <span class="number">15</span>, y: <span class="number">20</span>, z: <span class="number">0</span> }
-    { x: <span class="number">0</span>, y: <span class="number">20</span>, z: -<span class="number">15</span> }
-    { x: <span class="number">0</span>, y: <span class="number">20</span>, z: <span class="number">15</span> }
-  ].forEach (offset) -&gt;
-    cube = <span class="keyword">new</span> THREE.Mesh geometry, material
-    cube.position.set x + offset.x, y + offset.y, z + offset.z
-    scene.add cube
-
 <span class="function"><span class="title">addCharacters</span></span> = (scene) -&gt;
   roboSheriff = GameObject
     name: <span class="string">"Robo Sheriff"</span>

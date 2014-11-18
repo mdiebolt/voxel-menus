@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>index</title>
+  <title>menu</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="http://strd6.github.io/cdn/parallel/docco.css" />
@@ -18,7 +18,7 @@
               <div class="pilwrap">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h1 id="main">Main</h1>
+              <h1 id="menu">Menu</h1>
 
             </div>
             <div class="content"><pre><code class="lang-coffeescript">
@@ -34,71 +34,26 @@
               </div>
               
             </div>
-            <div class="content"><pre><code class="lang-coffeescript">TacticsCore = require <span class="string">"tactics-core"</span>
+            <div class="content"><pre><code class="lang-coffeescript">module.<span class="function"><span class="title">exports</span></span> = (position, scene) -&gt;
+  geometry = <span class="keyword">new</span> THREE.BoxGeometry(<span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>)
+  material = <span class="keyword">new</span> THREE.MeshBasicMaterial
+    color: <span class="number">0xfffff</span>
 
-Loader = require <span class="string">"./loader"</span>
-modelData = require <span class="string">"./models"</span>
+  <span class="comment"># TODO: fix s3 cross domain nonsense</span>
+  <span class="comment"># material = new THREE.MeshLambertMaterial</span>
+  <span class="comment">#   map: THREE.ImageUtils.loadTexture "https://s3.amazonaws.com/distri-tactics/crate.jpg"</span>
 
-GameObject = require <span class="string">"./game_object"</span>
+  {x, y, z} = position
 
-t = <span class="number">0</span>
-cachedModels = {}
-spreadsheetAttributes = {}
-
-addedToScene = <span class="literal">false</span>
-
-Loader.fromObj <span class="string">"characters"</span>, modelData.characters
-
-TacticsCore.Loader.get()
-
-roboSheriff = <span class="literal">null</span>
-
-characters = []
-
-<span class="function"><span class="title">addCharacters</span></span> = (scene) -&gt;
-  roboSheriff = GameObject
-    name: <span class="string">"Robo Sheriff"</span>
-    cachedModels: cachedModels
-
-  characters.push roboSheriff
-  scene.add roboSheriff.I.obj3D
-
-$.<span class="keyword">when</span>(Loader.finished(), TacticsCore.Loader.get())
-.<span class="keyword">then</span> (modelData, spreadsheetData) -&gt;
-  extend cachedModels, modelData
-  extend spreadsheetAttributes, spreadsheetData
-
-  activeCharacter = <span class="literal">null</span>
-  theScene = <span class="literal">null</span>
-
-  TacticsCore.init
-    data: {}
-    update: (scene, t, dt) -&gt;
-      theScene = scene
-      <span class="comment"># Need this hack to prevent adding stuff to the scene each frame</span>
-      <span class="comment"># adding to the scene each frame resets the model position</span>
-      <span class="keyword">unless</span> addedToScene
-        addCharacters scene
-
-        addedToScene = <span class="literal">true</span>
-
-      characters.invoke <span class="string">"update"</span>, t, dt
-
-    clickObjectsFn: -&gt;
-      <span class="keyword">if</span> activeCharacter
-        theScene.children
-      <span class="keyword">else</span>
-        characters.map (character) -&gt; character.I.obj3D
-    click: (results) -&gt;
-      <span class="keyword">if</span> results[<span class="number">0</span>]
-        {object} = results[<span class="number">0</span>]
-
-        <span class="keyword">if</span> character = object.userData.character
-          activeCharacter = character
-          openMenu(character.I.position, theScene)
-        <span class="keyword">else</span>
-          <span class="comment"># Move to location</span>
-          activeCharacter?.I.position.copy(object.position).setY(<span class="number">0</span>)</code></pre>
+  [
+    { x: -<span class="number">15</span>, y: <span class="number">20</span>, z: <span class="number">0</span> }
+    { x: <span class="number">15</span>, y: <span class="number">20</span>, z: <span class="number">0</span> }
+    { x: <span class="number">0</span>, y: <span class="number">20</span>, z: -<span class="number">15</span> }
+    { x: <span class="number">0</span>, y: <span class="number">20</span>, z: <span class="number">15</span> }
+  ].forEach (offset) -&gt;
+    cube = <span class="keyword">new</span> THREE.Mesh geometry, material
+    cube.position.set x + offset.x, y + offset.y, z + offset.z
+    scene.add cube</code></pre>
 </div>
         </li>
         
