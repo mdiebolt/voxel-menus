@@ -91,11 +91,7 @@ $.<span class="keyword">when</span>(Loader.finished(), TacticsCore.Loader.get())
         characters.map (character) -&gt; character.I.obj3D
     click: (results) -&gt;
       <span class="keyword">if</span> results[<span class="number">0</span>]
-        console.log results[<span class="number">0</span>]
-
         {object} = results[<span class="number">0</span>]
-
-        console.log object
 
         <span class="keyword">if</span> character = object.userData.character
           activeCharacter = character
