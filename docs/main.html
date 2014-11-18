@@ -41,7 +41,7 @@ modelData = require <span class="string">"./models"</span>
 
 GameObject = require <span class="string">"./game_object"</span>
 
-{closeMenu, createMenu, openMenu} = require <span class="string">"./menu"</span>
+{closeMenu, createMenu, openMenu, updateMenu} = require <span class="string">"./menu"</span>
 
 t = <span class="number">0</span>
 cachedModels = {}
@@ -86,6 +86,7 @@ $.<span class="keyword">when</span>(Loader.finished(), TacticsCore.Loader.get())
 
         addedToScene = <span class="literal">true</span>
 
+      updateMenu()
       characters.invoke <span class="string">"update"</span>, t, dt
 
     clickObjectsFn: -&gt;

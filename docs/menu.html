@@ -34,7 +34,7 @@
               </div>
               
             </div>
-            <div class="content"><pre><code class="lang-coffeescript">require <span class="string">"./lib/tween"</span>
+            <div class="content"><pre><code class="lang-coffeescript">TWEEN = require <span class="string">"./lib/tween"</span>
 
 OFFSETS = [
   { x: -<span class="number">15</span>, y: <span class="number">20</span>, z: <span class="number">0</span> }
@@ -52,6 +52,7 @@ material = <span class="keyword">new</span> THREE.MeshBasicMaterial
 <span class="comment">#   map: THREE.ImageUtils.loadTexture "https://s3.amazonaws.com/distri-tactics/crate.jpg"</span>
 
 menuCubes = []
+tweens = []
 
 module.exports = 
   createMenu: (scene) -&gt;
@@ -65,13 +66,52 @@ module.exports =
   openMenu: (position) -&gt;       
     {x, y, z} = position
 
+    tweens.length = <span class="number">0</span>
+
     menuCubes.forEach (cube, i) -&gt;
-      cube.visible = <span class="literal">true</span>
-      cube.position.set x + OFFSETS[i].x, y + OFFSETS[i].y, z + OFFSETS[i].z
+      start = 
+        x: x + OFFSETS[i].x
+        y: <span class="number">500</span>
+        z: z + OFFSETS[i].z
+
+      end = 
+        x: start.x 
+        y: y + OFFSETS[i].y
+        z: start.z
+
+      tween = <span class="keyword">new</span> TWEEN.Tween(start).to(end, <span class="number">1000</span>)
+      tweens.push
+        tween: tween
+        cube: cube
+      tween.start()
 
   closeMenu: -&gt;
-    menuCubes.forEach (cube) -&gt;
-      cube.position.setY <span class="number">500</span></code></pre>
+    tweens.length = <span class="number">0</span>
+
+    menuCubes.forEach (cube, i) -&gt;
+      {x, y, z} = cube.position
+
+      start = 
+        x: x
+        y: y
+        z: z
+
+      end = 
+        x: x
+        y: <span class="number">500</span>
+        z: z
+
+      tween = <span class="keyword">new</span> TWEEN.Tween(start).to(end, <span class="number">1000</span>)
+      tweens.push
+        tween: tween
+        cube: cube
+      tween.start()
+
+  updateMenu: -&gt;
+    TWEEN.update()
+    tweens.forEach (obj) -&gt;
+      obj.tween.onUpdate -&gt;
+        obj.cube.position.set <span class="property">@x</span>, <span class="property">@y</span>, <span class="property">@z</span></code></pre>
 </div>
         </li>
         
