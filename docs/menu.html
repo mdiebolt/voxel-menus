@@ -74,12 +74,12 @@ module.exports =
     menuCubes.forEach (cube, i) -&gt;
       start = 
         x: x + OFFSETS[i].x
-        y: OFF_CAMERA_HEIGHT
+        y: OFF_CAMERA_HEIGHT + (i * <span class="number">20</span>)
         z: z + OFFSETS[i].z
 
       end = 
         x: start.x 
-        y: y + OFFSETS[i].y
+        y: y + OFFSETS[i].y 
         z: start.z
 
       tween = <span class="keyword">new</span> TWEEN.Tween(start).to(end, ANIMATION_DURATION)
@@ -102,7 +102,7 @@ module.exports =
 
       end = 
         x: x
-        y: OFF_CAMERA_HEIGHT
+        y: OFF_CAMERA_HEIGHT + (i * <span class="number">20</span>)
         z: z
 
       tween = <span class="keyword">new</span> TWEEN.Tween(start).to(end, ANIMATION_DURATION)
@@ -110,6 +110,7 @@ module.exports =
       tweens.push
         tween: tween
         cube: cube
+
       tween.start()
 
   updateMenu: -&gt;
