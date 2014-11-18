@@ -57,8 +57,7 @@ module.exports =
   createMenu: (scene) -&gt;
     OFFSETS.forEach (offset) -&gt;
       cube = <span class="keyword">new</span> THREE.Mesh geometry, material
-      cube.position.set offset.x, offset.y, offset.z
-      cube.visible = <span class="literal">false</span>
+      cube.position.set offset.x, offset.y + <span class="number">500</span>, offset.z
 
       menuCubes.push cube
       scene.add cube        
