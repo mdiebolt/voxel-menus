@@ -24,8 +24,8 @@ Main
 
     openMenu = (position, scene) ->
       geometry = new THREE.BoxGeometry(5, 5, 5)
-      material = new THREE.MeshBasicMaterial
-        color: 0xfffff
+      material = new THREE.MeshLambertMaterial
+        map: THREE.ImageUtils.loadTexture "https://s3.amazonaws.com/distri-tactics/crate.jpg?blah=twadsfas"
         
       {x, y, z} = position
       
