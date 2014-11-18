@@ -41,12 +41,12 @@ Menu
         menuCubes.forEach (cube, i) ->
           start = 
             x: x + OFFSETS[i].x
-            y: OFF_CAMERA_HEIGHT
+            y: OFF_CAMERA_HEIGHT + (i * 20)
             z: z + OFFSETS[i].z
             
           end = 
             x: start.x 
-            y: y + OFFSETS[i].y
+            y: y + OFFSETS[i].y 
             z: start.z
             
           tween = new TWEEN.Tween(start).to(end, ANIMATION_DURATION)
@@ -69,14 +69,15 @@ Menu
             
           end = 
             x: x
-            y: OFF_CAMERA_HEIGHT
+            y: OFF_CAMERA_HEIGHT + (i * 20)
             z: z
-            
+           
           tween = new TWEEN.Tween(start).to(end, ANIMATION_DURATION)
           tween.easing(TWEEN.Easing.Back.InOut)
           tweens.push
             tween: tween
             cube: cube
+
           tween.start()
           
       updateMenu: ->
