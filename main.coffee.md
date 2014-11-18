@@ -58,11 +58,7 @@ Main
             characters.map (character) -> character.I.obj3D
         click: (results) ->
           if results[0]
-            console.log results[0]
-
             {object} = results[0]
-
-            console.log object
 
             if character = object.userData.character
               activeCharacter = character
