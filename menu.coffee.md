@@ -4,6 +4,7 @@ Menu
     TWEEN = require "./lib/tween"
   
     OFF_CAMERA_HEIGHT = 100
+    ANIMATION_DURATION = 500
   
     OFFSETS = [
       { x: -15, y: 20, z: 0 }
@@ -48,7 +49,7 @@ Menu
             y: y + OFFSETS[i].y
             z: start.z
             
-          tween = new TWEEN.Tween(start).to(end, 1000)
+          tween = new TWEEN.Tween(start).to(end, ANIMATION_DURATION)
           tween.easing(TWEEN.Easing.Back.InOut)
           tweens.push
             tween: tween
@@ -71,7 +72,7 @@ Menu
             y: OFF_CAMERA_HEIGHT
             z: z
             
-          tween = new TWEEN.Tween(start).to(end, 1000)
+          tween = new TWEEN.Tween(start).to(end, ANIMATION_DURATION)
           tween.easing(TWEEN.Easing.Back.InOut)
           tweens.push
             tween: tween
