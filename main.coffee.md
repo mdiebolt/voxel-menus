@@ -14,8 +14,6 @@ Main
 
     addedToScene = false
 
-    Loader.fromObj "items", modelData.items
-    Loader.fromObj "terrain", modelData.terrain
     Loader.fromObj "characters", modelData.characters
 
     TacticsCore.Loader.get()
