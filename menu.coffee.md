@@ -1,5 +1,7 @@
 Menu
 ====
+
+    require "./lib/tween"
   
     OFFSETS = [
       { x: -15, y: 20, z: 0 }
@@ -37,4 +39,4 @@ Menu
       
       closeMenu: ->
         menuCubes.forEach (cube) ->
-          cube.visible = false
+          cube.position.setY 500
