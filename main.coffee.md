@@ -22,6 +22,23 @@ Main
 
     characters = []
 
+    openMenu = (position, scene) ->
+      geometry = new THREE.BoxGeometry(5, 5, 5)
+      material = new THREE.MeshBasicMaterial
+        color: 0xfffff
+        
+      {x, y, z} = position
+      
+      [
+        { x: -15, y: 20, z: 0 }
+        { x: 15, y: 20, z: 0 }
+        { x: 0, y: 20, z: -15 }
+        { x: 0, y: 20, z: 15 }
+      ].forEach (offset) ->
+        cube = new THREE.Mesh geometry, material
+        cube.position.set x + offset.x, y + offset.y, z + offset.z
+        scene.add cube
+
     addCharacters = (scene) ->
       roboSheriff = GameObject
         name: "Robo Sheriff"
@@ -62,6 +79,7 @@ Main
 
             if character = object.userData.character
               activeCharacter = character
+              openMenu(character.I.position, theScene)
             else
               # Move to location
               activeCharacter?.I.position.copy(object.position).setY(0)
