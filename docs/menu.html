@@ -36,6 +36,8 @@
             </div>
             <div class="content"><pre><code class="lang-coffeescript">TWEEN = require <span class="string">"./lib/tween"</span>
 
+OFF_CAMERA_HEIGHT = <span class="number">100</span>
+
 OFFSETS = [
   { x: -<span class="number">15</span>, y: <span class="number">20</span>, z: <span class="number">0</span> }
   { x: <span class="number">15</span>, y: <span class="number">20</span>, z: <span class="number">0</span> }
@@ -58,7 +60,7 @@ module.exports =
   createMenu: (scene) -&gt;
     OFFSETS.forEach (offset) -&gt;
       cube = <span class="keyword">new</span> THREE.Mesh geometry, material
-      cube.position.set offset.x, offset.y + <span class="number">500</span>, offset.z
+      cube.position.set offset.x, offset.y + OFF_CAMERA_HEIGHT, offset.z
 
       menuCubes.push cube
       scene.add cube        
@@ -71,7 +73,7 @@ module.exports =
     menuCubes.forEach (cube, i) -&gt;
       start = 
         x: x + OFFSETS[i].x
-        y: <span class="number">500</span>
+        y: OFF_CAMERA_HEIGHT
         z: z + OFFSETS[i].z
 
       end = 
@@ -80,6 +82,7 @@ module.exports =
         z: start.z
 
       tween = <span class="keyword">new</span> TWEEN.Tween(start).to(end, <span class="number">1000</span>)
+      tween.easing(TWEEN.Easing.Back.InOut)
       tweens.push
         tween: tween
         cube: cube
@@ -98,10 +101,11 @@ module.exports =
 
       end = 
         x: x
-        y: <span class="number">500</span>
+        y: OFF_CAMERA_HEIGHT
         z: z
 
       tween = <span class="keyword">new</span> TWEEN.Tween(start).to(end, <span class="number">1000</span>)
+      tween.easing(TWEEN.Easing.Back.InOut)
       tweens.push
         tween: tween
         cube: cube
