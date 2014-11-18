@@ -24,8 +24,7 @@ Menu
       createMenu: (scene) ->
         OFFSETS.forEach (offset) ->
           cube = new THREE.Mesh geometry, material
-          cube.position.set offset.x, offset.y, offset.z
-          cube.visible = false
+          cube.position.set offset.x, offset.y + 500, offset.z
           
           menuCubes.push cube
           scene.add cube        
