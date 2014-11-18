@@ -34,26 +34,43 @@
               </div>
               
             </div>
-            <div class="content"><pre><code class="lang-coffeescript">module.<span class="function"><span class="title">exports</span></span> = (position, scene) -&gt;
-  geometry = <span class="keyword">new</span> THREE.BoxGeometry(<span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>)
-  material = <span class="keyword">new</span> THREE.MeshBasicMaterial
-    color: <span class="number">0xfffff</span>
+            <div class="content"><pre><code class="lang-coffeescript">OFFSETS = [
+  { x: -<span class="number">15</span>, y: <span class="number">20</span>, z: <span class="number">0</span> }
+  { x: <span class="number">15</span>, y: <span class="number">20</span>, z: <span class="number">0</span> }
+  { x: <span class="number">0</span>, y: <span class="number">20</span>, z: -<span class="number">15</span> }
+  { x: <span class="number">0</span>, y: <span class="number">20</span>, z: <span class="number">15</span> }
+]    
 
-  <span class="comment"># TODO: fix s3 cross domain nonsense</span>
-  <span class="comment"># material = new THREE.MeshLambertMaterial</span>
-  <span class="comment">#   map: THREE.ImageUtils.loadTexture "https://s3.amazonaws.com/distri-tactics/crate.jpg"</span>
+geometry = <span class="keyword">new</span> THREE.BoxGeometry(<span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>)
+material = <span class="keyword">new</span> THREE.MeshBasicMaterial
+  color: <span class="number">0xfffff</span>    
 
-  {x, y, z} = position
+<span class="comment"># TODO: fix s3 cross domain nonsense</span>
+<span class="comment"># material = new THREE.MeshLambertMaterial</span>
+<span class="comment">#   map: THREE.ImageUtils.loadTexture "https://s3.amazonaws.com/distri-tactics/crate.jpg"</span>
 
-  [
-    { x: -<span class="number">15</span>, y: <span class="number">20</span>, z: <span class="number">0</span> }
-    { x: <span class="number">15</span>, y: <span class="number">20</span>, z: <span class="number">0</span> }
-    { x: <span class="number">0</span>, y: <span class="number">20</span>, z: -<span class="number">15</span> }
-    { x: <span class="number">0</span>, y: <span class="number">20</span>, z: <span class="number">15</span> }
-  ].forEach (offset) -&gt;
-    cube = <span class="keyword">new</span> THREE.Mesh geometry, material
-    cube.position.set x + offset.x, y + offset.y, z + offset.z
-    scene.add cube</code></pre>
+menuCubes = []
+
+module.exports = 
+  createMenu: (scene) -&gt;
+    OFFSETS.forEach (offset) -&gt;
+      cube = <span class="keyword">new</span> THREE.Mesh geometry, material
+      cube.position.set offset.x, offset.y, offset.z
+      cube.visible = <span class="literal">false</span>
+
+      menuCubes.push cube
+      scene.add cube        
+
+  openMenu: (position) -&gt;       
+    {x, y, z} = position
+
+    menuCubes.forEach (cube, i) -&gt;
+      cube.visible = <span class="literal">true</span>
+      cube.position.set x + OFFSETS[i].x, y + OFFSETS[i].y, z + OFFSETS[i].z
+
+  closeMenu: -&gt;
+    menuCubes.forEach (cube) -&gt;
+      cube.visible = <span class="literal">false</span></code></pre>
 </div>
         </li>
         

@@ -41,6 +41,8 @@ modelData = require <span class="string">"./models"</span>
 
 GameObject = require <span class="string">"./game_object"</span>
 
+{closeMenu, createMenu, openMenu} = require <span class="string">"./menu"</span>
+
 t = <span class="number">0</span>
 cachedModels = {}
 spreadsheetAttributes = {}
@@ -62,6 +64,8 @@ characters = []
 
   characters.push roboSheriff
   scene.add roboSheriff.I.obj3D
+
+  createMenu(scene)
 
 $.<span class="keyword">when</span>(Loader.finished(), TacticsCore.Loader.get())
 .<span class="keyword">then</span> (modelData, spreadsheetData) -&gt;
@@ -98,7 +102,9 @@ $.<span class="keyword">when</span>(Loader.finished(), TacticsCore.Loader.get())
           openMenu(character.I.position, theScene)
         <span class="keyword">else</span>
           <span class="comment"># Move to location</span>
-          activeCharacter?.I.position.copy(object.position).setY(<span class="number">0</span>)</code></pre>
+          activeCharacter?.I.position.copy(object.position).setY(<span class="number">0</span>)
+          activeCharacter = <span class="literal">null</span>
+          closeMenu()</code></pre>
 </div>
         </li>
         
