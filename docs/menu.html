@@ -34,7 +34,9 @@
               </div>
               
             </div>
-            <div class="content"><pre><code class="lang-coffeescript">OFFSETS = [
+            <div class="content"><pre><code class="lang-coffeescript">require <span class="string">"./lib/tween"</span>
+
+OFFSETS = [
   { x: -<span class="number">15</span>, y: <span class="number">20</span>, z: <span class="number">0</span> }
   { x: <span class="number">15</span>, y: <span class="number">20</span>, z: <span class="number">0</span> }
   { x: <span class="number">0</span>, y: <span class="number">20</span>, z: -<span class="number">15</span> }
@@ -70,7 +72,7 @@ module.exports =
 
   closeMenu: -&gt;
     menuCubes.forEach (cube) -&gt;
-      cube.visible = <span class="literal">false</span></code></pre>
+      cube.position.setY <span class="number">500</span></code></pre>
 </div>
         </li>
         
