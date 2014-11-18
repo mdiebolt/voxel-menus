@@ -51,9 +51,7 @@ Loader.fromObj <span class="string">"characters"</span>, modelData.characters
 
 TacticsCore.Loader.get()
 
-bartender = <span class="literal">null</span>
 roboSheriff = <span class="literal">null</span>
-roboSheriff2 = <span class="literal">null</span>
 
 characters = []
 
@@ -65,23 +63,8 @@ characters = []
   characters.push roboSheriff
   scene.add roboSheriff.I.obj3D
 
-  roboSheriff2 = GameObject
-    name: <span class="string">"Robo Sheriff"</span>
-    cachedModels: cachedModels
-    tOffset: <span class="number">0.125</span>
-    position:
-      x: <span class="number">20</span>
-      y: <span class="number">0</span>
-      z: <span class="number">20</span>
-
-  characters.push roboSheriff2
-  scene.add roboSheriff2.I.obj3D
-
 $.<span class="keyword">when</span>(Loader.finished(), TacticsCore.Loader.get())
 .<span class="keyword">then</span> (modelData, spreadsheetData) -&gt;
-  console.log modelData
-  console.log spreadsheetData
-
   extend cachedModels, modelData
   extend spreadsheetAttributes, spreadsheetData
 
