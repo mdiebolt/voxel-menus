@@ -24,8 +24,12 @@ Main
 
     openMenu = (position, scene) ->
       geometry = new THREE.BoxGeometry(5, 5, 5)
-      material = new THREE.MeshLambertMaterial
-        map: THREE.ImageUtils.loadTexture "https://s3.amazonaws.com/distri-tactics/crate.jpg?blah=twadsfas"
+      material = new THREE.MeshBasicMaterial
+        color: 0xfffff
+      
+      # TODO: fix s3 cross domain nonsense
+      # material = new THREE.MeshLambertMaterial
+      #   map: THREE.ImageUtils.loadTexture "https://s3.amazonaws.com/distri-tactics/crate.jpg"
         
       {x, y, z} = position
       
