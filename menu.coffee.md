@@ -54,15 +54,17 @@ Menu
 
         tweens.length = 0
 
-        menuCubes.forEach (cube, i) ->
+        menuCubes.forEach (cube) ->
+          position = MENU_ACTIONS[cube.userData.action].position
+          
           start =
-            x: x + OFFSETS[i].x
+            x: x + position.x
             y: OFF_CAMERA_HEIGHT + (i * 20)
-            z: z + OFFSETS[i].z
+            z: z + position.z
 
           end =
             x: start.x
-            y: y + OFFSETS[i].y
+            y: y + position.y
             z: start.z
 
           tween = new TWEEN.Tween(start).to(end, ANIMATION_DURATION)
