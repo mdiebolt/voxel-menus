@@ -41,7 +41,8 @@ Menu
     module.exports =
       clickMenu: (action) ->
         menuCubes.forEach (cube) ->
-          grow = new TWEEN.Tween(cube.scale).to({x: 1.5, y: 1.5, z: 1.5}, 1000)
+          grow = new TWEEN.Tween(cube.scale).to({x: 1.5, y: 1.5, z: 1.5}, 500)
+          grow.easing(TWEEN.Easing.Back.Out)
           grow.start()
       
       createMenu: (scene) ->
