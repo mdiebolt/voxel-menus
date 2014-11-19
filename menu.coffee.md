@@ -39,6 +39,12 @@ Menu
     tweens = []
 
     module.exports =
+      clickMenu: (action) ->
+        menuCubes.forEach (cube) ->
+          new TWEEN.Tween(cube.scale)
+            .to({x: 1.5, y: 1.5, z: 1.5}, 1000)
+            .start()
+      
       createMenu: (scene) ->
         keyValues MENU_ACTIONS, (name, {position}) ->
           {x, y, z} = position

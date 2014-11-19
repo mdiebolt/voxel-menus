@@ -8,7 +8,7 @@ Main
 
     GameObject = require "./game_object"
 
-    {closeMenu, createMenu, openMenu, updateMenu} = require "./menu"
+    {clickMenu, closeMenu, createMenu, openMenu, updateMenu} = require "./menu"
 
     t = 0
     cachedModels = {}
@@ -68,6 +68,10 @@ Main
             if character = object.userData.character
               activeCharacter = character
               openMenu(character.I.position, theScene)
+            else if action = object.userData.action
+              clickMenu action
+              console.log "executing #{action}"
+              # activeCharacter?[action]()
             else
               # Move to location
               activeCharacter?.I.position.copy(object.position).setY(0)
