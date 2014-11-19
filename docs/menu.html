@@ -73,7 +73,7 @@ tweens = []
 
 module.exports =
   createMenu: (scene) -&gt;
-    keyValues MENU_ACTIONS (name, {position}) -&gt;
+    keyValues MENU_ACTIONS, (name, {position}) -&gt;
       {x, y, z} = position
       cube = <span class="keyword">new</span> THREE.Mesh geometry, material
       cube.position.set x, y + OFF_CAMERA_HEIGHT, z
@@ -88,14 +88,16 @@ module.exports =
     tweens.length = <span class="number">0</span>
 
     menuCubes.forEach (cube, i) -&gt;
+      position = MENU_ACTIONS[cube.userData.action].position
+
       start =
-        x: x + OFFSETS[i].x
+        x: x + position.x
         y: OFF_CAMERA_HEIGHT + (i * <span class="number">20</span>)
-        z: z + OFFSETS[i].z
+        z: z + position.z
 
       end =
         x: start.x
-        y: y + OFFSETS[i].y
+        y: y + position.y
         z: start.z
 
       tween = <span class="keyword">new</span> TWEEN.Tween(start).to(end, ANIMATION_DURATION)
