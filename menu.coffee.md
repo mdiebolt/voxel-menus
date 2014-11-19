@@ -40,9 +40,11 @@ Menu
 
     module.exports =
       createMenu: (scene) ->
-        OFFSETS.forEach (offset) ->
+        keyValues MENU_ACTIONS (name, {position}) ->
+          {x, y, z} = position
           cube = new THREE.Mesh geometry, material
-          cube.position.set offset.x, offset.y + OFF_CAMERA_HEIGHT, offset.z
+          cube.position.set x, y + OFF_CAMERA_HEIGHT, z
+          cube.userData.action = name
 
           menuCubes.push cube
           scene.add cube
