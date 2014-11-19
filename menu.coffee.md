@@ -1,20 +1,36 @@
 Menu
 ====
 
+    require "tactics-core"
     TWEEN = require "./lib/tween"
 
     OFF_CAMERA_HEIGHT = 100
     ANIMATION_DURATION = 500
 
-    OFFSETS = [
-      { x: -15, y: 20, z: 0 }
-      { x: 15, y: 20, z: 0 }
-      { x: 0, y: 20, z: -15 }
-      { x: 0, y: 20, z: 15 }
-    ]
+    MENU_ACTIONS = 
+      move:
+        position:
+          x: -15
+          y: 20
+          z: 0
+      attack:
+        position:
+          x: 15
+          y: 20
+          z: 0
+      magic:
+        position:
+          x: 0
+          y: 20
+          z: -15
+      wait:
+        position:
+          x: 0
+          y: 20
+          z: 15
 
     geometry = new THREE.BoxGeometry(5, 5, 5)
-    
+
     THREE.ImageUtils.crossOrigin = ""
     material = new THREE.MeshLambertMaterial
       map: THREE.ImageUtils.loadTexture "https://s3.amazonaws.com/distri-tactics/crate.jpg"
