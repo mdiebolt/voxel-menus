@@ -7,9 +7,9 @@ Main
     modelData = require "./models"
 
     GameObject = require "./game_object"
-    
+
     {closeMenu, createMenu, openMenu, updateMenu} = require "./menu"
-    
+
     t = 0
     cachedModels = {}
     spreadsheetAttributes = {}
@@ -31,7 +31,7 @@ Main
 
       characters.push roboSheriff
       scene.add roboSheriff.I.obj3D
-      
+
       createMenu(scene)
 
     $.when(Loader.finished(), TacticsCore.Loader.get())
