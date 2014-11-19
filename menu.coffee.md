@@ -40,7 +40,7 @@ Menu
 
     module.exports =
       createMenu: (scene) ->
-        keyValues MENU_ACTIONS (name, {position}) ->
+        keyValues MENU_ACTIONS, (name, {position}) ->
           {x, y, z} = position
           cube = new THREE.Mesh geometry, material
           cube.position.set x, y + OFF_CAMERA_HEIGHT, z
@@ -54,7 +54,7 @@ Menu
 
         tweens.length = 0
 
-        menuCubes.forEach (cube) ->
+        menuCubes.forEach (cube, i) ->
           position = MENU_ACTIONS[cube.userData.action].position
           
           start =
