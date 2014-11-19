@@ -74,9 +74,10 @@ tweens = []
 module.exports =
   clickMenu: (action) -&gt;
     menuCubes.forEach (cube) -&gt;
-      grow = <span class="keyword">new</span> TWEEN.Tween(cube.scale).to({x: <span class="number">1.5</span>, y: <span class="number">1.5</span>, z: <span class="number">1.5</span>}, <span class="number">500</span>)
-      grow.easing(TWEEN.Easing.Back.Out)
-      grow.start()
+      <span class="keyword">if</span> cube.userData.action <span class="keyword">is</span> action
+        grow = <span class="keyword">new</span> TWEEN.Tween(cube.scale).to({x: <span class="number">1.5</span>, y: <span class="number">1.5</span>, z: <span class="number">1.5</span>}, <span class="number">500</span>)
+        grow.easing(TWEEN.Easing.Back.Out)
+        grow.start()
 
   createMenu: (scene) -&gt;
     keyValues MENU_ACTIONS, (name, {position}) -&gt;
