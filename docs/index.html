@@ -41,7 +41,7 @@ modelData = require <span class="string">"./models"</span>
 
 GameObject = require <span class="string">"./game_object"</span>
 
-{closeMenu, createMenu, openMenu, updateMenu} = require <span class="string">"./menu"</span>
+{clickMenu, closeMenu, createMenu, openMenu, updateMenu} = require <span class="string">"./menu"</span>
 
 t = <span class="number">0</span>
 cachedModels = {}
@@ -101,6 +101,10 @@ $.<span class="keyword">when</span>(Loader.finished(), TacticsCore.Loader.get())
         <span class="keyword">if</span> character = object.userData.character
           activeCharacter = character
           openMenu(character.I.position, theScene)
+        <span class="keyword">else</span> <span class="keyword">if</span> action = object.userData.action
+          clickMenu action
+          console.log <span class="string">"executing <span class="subst">#{action}</span>"</span>
+          <span class="comment"># activeCharacter?[action]()</span>
         <span class="keyword">else</span>
           <span class="comment"># Move to location</span>
           activeCharacter?.I.position.copy(object.position).setY(<span class="number">0</span>)
