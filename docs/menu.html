@@ -44,42 +44,40 @@ OFFSETS = [
   { x: <span class="number">15</span>, y: <span class="number">20</span>, z: <span class="number">0</span> }
   { x: <span class="number">0</span>, y: <span class="number">20</span>, z: -<span class="number">15</span> }
   { x: <span class="number">0</span>, y: <span class="number">20</span>, z: <span class="number">15</span> }
-]    
+]
 
 geometry = <span class="keyword">new</span> THREE.BoxGeometry(<span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>)
-material = <span class="keyword">new</span> THREE.MeshBasicMaterial
-  color: <span class="number">0xfffff</span>    
 
-<span class="comment"># TODO: fix s3 cross domain nonsense</span>
-<span class="comment"># material = new THREE.MeshLambertMaterial</span>
-<span class="comment">#   map: THREE.ImageUtils.loadTexture "https://s3.amazonaws.com/distri-tactics/crate.jpg"</span>
+THREE.ImageUtils.crossOrigin = <span class="string">""</span>
+material = <span class="keyword">new</span> THREE.MeshLambertMaterial
+  map: THREE.ImageUtils.loadTexture <span class="string">"https://s3.amazonaws.com/distri-tactics/crate.jpg"</span>
 
 menuCubes = []
 tweens = []
 
-module.exports = 
+module.exports =
   createMenu: (scene) -&gt;
     OFFSETS.forEach (offset) -&gt;
       cube = <span class="keyword">new</span> THREE.Mesh geometry, material
       cube.position.set offset.x, offset.y + OFF_CAMERA_HEIGHT, offset.z
 
       menuCubes.push cube
-      scene.add cube        
+      scene.add cube
 
-  openMenu: (position) -&gt;       
+  openMenu: (position) -&gt;
     {x, y, z} = position
 
     tweens.length = <span class="number">0</span>
 
     menuCubes.forEach (cube, i) -&gt;
-      start = 
+      start =
         x: x + OFFSETS[i].x
         y: OFF_CAMERA_HEIGHT + (i * <span class="number">20</span>)
         z: z + OFFSETS[i].z
 
-      end = 
-        x: start.x 
-        y: y + OFFSETS[i].y 
+      end =
+        x: start.x
+        y: y + OFFSETS[i].y
         z: start.z
 
       tween = <span class="keyword">new</span> TWEEN.Tween(start).to(end, ANIMATION_DURATION)
@@ -95,12 +93,12 @@ module.exports =
     menuCubes.forEach (cube, i) -&gt;
       {x, y, z} = cube.position
 
-      start = 
+      start =
         x: x
         y: y
         z: z
 
-      end = 
+      end =
         x: x
         y: OFF_CAMERA_HEIGHT + (i * <span class="number">20</span>)
         z: z
